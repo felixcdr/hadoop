@@ -1,2 +1,14 @@
 
 .DS_Store
+
+wordcount/bin/dist/GPlus.jar
+
+wordcount/bin/dist/HadoopTest.jar
+
+wordcount/bin/dist/lib/HadoopTest.jar
+
+*.class
+
+wordcount/bin/build.xml
+
+wordcount/dist/GPlus.jar

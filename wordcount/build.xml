@@ -1,0 +1,53 @@
+<project name="GooglePlusMR" default="dist" basedir=".">
+    <description>
+        Sample MapReduce project build file
+    </description>
+  <!-- set global properties for this build -->
+  <property name="src" location="src"/>
+  <property name="build" location="classes"/>
+  <property name="dist"  location="dist"/>
+
+ <!-- <property name="hadoop.version" value="0.20.2-cdh3u2"/>
+  <property name="hadoop.core.jar" value="hadoop-${hadoop.version}-core.jar" />
+  <property name = "hadoop.base.path" value ="/usr/lib/hadoop-0.20" />
+  -->
+
+	<property name = "hadoop.base.path" location="/Users/fcuadrado/desarrollo/hadoop-0.20.203.0" />
+	<property name="hadoop.version" value="0.20.203.0"/>
+	  <property name="hadoop.core.jar" value="hadoop-core-${hadoop.version}.jar" />
+	
+
+  <target name="init">
+    <!-- Create the time stamp -->
+    <tstamp/>
+    <!-- Create the build directory structure used by compile -->
+    <mkdir dir="${build}"/>
+  </target>
+
+  <target name="compile" depends="init"
+        description="compile the source " >
+    <!-- Compile the java code from ${src} into ${build} -->
+    <javac srcdir="${src}" destdir="${build}">
+    <classpath>
+      <pathelement location="${hadoop.base.path}/${hadoop.core.jar}"/>
+      <pathelement location="${hadoop.base.path}/lib/*.jar"/>
+    </classpath>
+    </javac>
+  </target>
+
+  <target name="dist" depends="compile"
+        description="generate the distribution" >
+    <!-- Create the distribution directory -->
+    <mkdir dir="${dist}"/>
+
+    <!-- Put everything in ${build} into a jar file -->
+    <jar jarfile="${dist}/GPlus.jar" basedir="${build}"/>
+  </target>
+
+  <target name="clean"
+        description="clean up" >
+    <!-- Delete the ${build} and ${dist} directory trees -->
+    <delete dir="${build}"/>
+    <delete dir="${dist}"/>
+  </target>
+</project>
