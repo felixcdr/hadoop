@@ -17,7 +17,10 @@ public class WordCount {
 		
 		job.setReducerClass(IntSumReducer.class);
 		job.setMapperClass(TokenizerMapper.class);
+		job.setCombinerClass(IntSumReducer.class);
 		
+		
+		job.setNumReduceTasks(3);
 		
 		job.setMapOutputKeyClass(Text.class);
 		job.setMapOutputValueClass(IntWritable.class);
