@@ -10,7 +10,9 @@ public class TokenizerMapper extends Mapper<Object, Text, Text, IntWritable> {
 
 	public void map(Object key, Text value, Context context)
 			throws IOException, InterruptedException {
-		StringTokenizer itr = new StringTokenizer(value.toString(),
+		String line = value.toString().replaceAll("[^\\p{ASCII}]|\\d", "");
+		
+		StringTokenizer itr = new StringTokenizer(line,
 				"-- \t\n\r\f,.:;?![]'\"#()$%&@*+-/");
 
 		while (itr.hasMoreTokens()) {
