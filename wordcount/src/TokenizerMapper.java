@@ -11,7 +11,7 @@ public class TokenizerMapper extends Mapper<Object, Text, Text, IntWritable> {
 	public void map(Object key, Text value, Context context)
 			throws IOException, InterruptedException {
 		StringTokenizer itr = new StringTokenizer(value.toString(),
-				"-- \t\n\r\f,.:;?![]'\"#()");
+				"-- \t\n\r\f,.:;?![]'\"#()$%&@*+-/");
 
 		while (itr.hasMoreTokens()) {
 			data.set(itr.nextToken().toLowerCase());
