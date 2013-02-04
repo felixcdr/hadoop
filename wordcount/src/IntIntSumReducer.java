@@ -12,7 +12,7 @@ public class IntIntSumReducer extends
 		
 		int i = 0;
 		for(IntWritable value: values){
-			i++;
+			i+=value.get();
 		}
 		count.set(i);
 		ctx.write(key,count);
