@@ -3,16 +3,18 @@ import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
 
 public class TokenToLengthMapper extends
-		Mapper<Text, Text, IntWritable, IntWritable> {
+		Mapper<Object, Text, IntWritable, IntWritable> {
 	
 	private IntWritable one = new IntWritable(1);
 	
 	private IntWritable length = new IntWritable();
 	
-	protected void map( Text key, Text value, Context context)
+	protected void map( Object key, Text value, Context context)
 			throws java.io.IOException, InterruptedException {
 		
-		length.set(Integer.parseInt(key.toString()));
+		String word = value.toString().split("\t")[1];
+		
+		length.set(Integer.parseInt(word));
 		
 		//take key only
 		context.write(length, one);
