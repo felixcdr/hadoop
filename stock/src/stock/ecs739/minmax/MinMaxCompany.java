@@ -29,11 +29,13 @@ public class MinMaxCompany {
 		
 		job.setNumReduceTasks(3);
 		
+		job.setOutputKeyClass(Text.class);
+		job.setOutputValueClass(Text.class);
+		
+		
 		job.setMapOutputKeyClass(Text.class);
 		job.setMapOutputValueClass(DoubleWritable.class);
 
-		job.setOutputKeyClass(Text.class);
-		job.setOutputValueClass(Text.class);
 		
 		
 		Path outputPath = new Path(output);
