@@ -30,7 +30,7 @@ public class MinMaxCompany {
 		job.setNumReduceTasks(3);
 		
 		job.setOutputKeyClass(Text.class);
-		job.setOutputValueClass(Text.class);
+		//job.setOutputValueClass(Text.class);
 		
 		
 		job.setMapOutputKeyClass(Text.class);
