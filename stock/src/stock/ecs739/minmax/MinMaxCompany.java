@@ -23,14 +23,13 @@ public class MinMaxCompany {
 		
 		job.setReducerClass(CompanyMinMaxReducer.class);
 		job.setMapperClass(DailyMaxMapper.class);
-		job.setCombinerClass(CompanyMinMaxReducer.class);
 		
 		job.setInputFormatClass(StockInputFormat.class);
 		
 		job.setNumReduceTasks(3);
 		
-		//job.setOutputKeyClass(Text.class);
-		//job.setOutputValueClass(Text.class);
+		job.setOutputKeyClass(Text.class);
+		job.setOutputValueClass(Text.class);
 		
 		
 		job.setMapOutputKeyClass(Text.class);
