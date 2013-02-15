@@ -1,4 +1,4 @@
-package subgraph;
+package adl;
 
 
 import java.util.Arrays;
@@ -11,50 +11,39 @@ import org.apache.hadoop.io.compress.DefaultCodec;
 import org.apache.hadoop.io.SequenceFile;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
-import org.apache.hadoop.mapreduce.lib.input.SequenceFileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.mapreduce.lib.output.SequenceFileOutputFormat;
 
-import bfs.BFSNode;
 
 
+public class GraphToAdl {
 
-public class NodesXtractor {
-
-	
 	static enum Counters {
-		ReachableNodesAtMap, ReachableNodesAtReduce
+		FaultyEntries
 	};
+	
 	
 	public static void runJob(String[] input, String output) throws Exception {
 		
 		Configuration conf = new Configuration();
 		
 		
+		conf.set("SOURCENODE","103973430947917397287");
 		Job job = new Job(conf);
 			
 		
-		job.setJarByClass(NodesXtractor.class);
+		job.setJarByClass(GraphToAdl.class);
 
-		job.setMapperClass(NodesXtractorMapper.class);
-		job.setReducerClass(NodesXtractorReducer.class);
+		job.setMapperClass(GraphToAdlMapper.class);
 		
-		job.setNumReduceTasks(1);
-		
+		job.setNumReduceTasks(0);
 		
 		
-		job.setInputFormatClass(SequenceFileInputFormat.class);
-		job.setOutputFormatClass(SequenceFileOutputFormat.class);
-		SequenceFileOutputFormat.setCompressOutput(job, true);
-		SequenceFileOutputFormat.setOutputCompressionType(job,
-		SequenceFile.CompressionType.BLOCK);
-		SequenceFileOutputFormat.setOutputCompressorClass(job,
-		DefaultCodec.class);
 		
 		
 		
 		job.setOutputKeyClass(Text.class);
-		job.setOutputValueClass(BFSNode.class);
+		job.setOutputValueClass(NullWritable.class);
 		
 		
 
