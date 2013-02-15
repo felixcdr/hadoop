@@ -10,20 +10,21 @@ import org.apache.hadoop.mapreduce.Reducer;
 
 public class IterateBFSReducer extends Reducer<Text, BFSNode, Text, BFSNode> {
 	
-	private BFSNode node;
+	
 
 	public void reduce(Text nid, Iterable<BFSNode> values,Context context)
 			throws IOException, InterruptedException {
 
+		BFSNode node = null;
 		int dist = Integer.MAX_VALUE;
-		for (BFSNode node : values) {
+		for (BFSNode n : values) {
 				
-			if (node.getDistance() < dist) {
-				dist = node.getDistance();
+			if (n.getDistance() < dist) {
+				dist = n.getDistance();
 			}
 			//We need the complete node to propagate graph structure
-			if (!node.getId().equals(BFSNode.DISTANCE_INFO)) {
-				this.node = node;
+			if (n.getId().equals(BFSNode.DISTANCE_INFO) == false) {
+				node = n;
 			}
 		}
 

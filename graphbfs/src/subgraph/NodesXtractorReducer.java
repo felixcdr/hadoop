@@ -29,7 +29,7 @@ public class NodesXtractorReducer extends Reducer<Text, BFSNode, Text, BFSNode> 
 				dist = node.getDistance();
 			}
 			//We need the complete node to propagate graph structure
-			if (!node.getId().equals(BFSNode.DISTANCE_INFO)) {
+			if (node.getId().equals(BFSNode.DISTANCE_INFO) == false) {
 				isNew = false;
 				oldNode = node;
 			}
@@ -43,10 +43,7 @@ public class NodesXtractorReducer extends Reducer<Text, BFSNode, Text, BFSNode> 
 			context.getCounter(NodesXtractor.Counters.ReachableNodesAtReduce)
 					.increment(1);
 		}
-		else{
-			
-		}
-		
+				
 		if(isNew){
 			newNode.setId(nid.toString());
 			newNode.setDistance(dist); // Update the final distance.

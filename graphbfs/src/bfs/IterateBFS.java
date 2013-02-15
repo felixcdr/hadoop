@@ -50,6 +50,8 @@ public class IterateBFS {
 
 		outputPath.getFileSystem(conf).delete(outputPath, true);
 		job.waitForCompletion(true);
+		
+		
 	}
 
 	public static void main(String[] args) throws Exception {
