@@ -31,8 +31,15 @@ public class GPlusXMapper extends Mapper<LongWritable, Text, Text, BFSNode> {
 		String[] parts = value.toString().split(":");
 		String id = parts[0];
 		
-		String[] dest  = parts[1].split(",");
+		String[] dest;
 		
+		if(parts.length ==2){
+		
+		dest  = parts[1].split(",");
+		}else{
+			dest = new String[0];
+		}
+			
 					
 		//We set distance to 0 only if it is the source node
 		int distance = !id.equals(sourceId)?Integer.MAX_VALUE:0;
