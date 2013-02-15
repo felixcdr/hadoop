@@ -1,39 +1,40 @@
-package stock.ecs739.minmax;
+package bfs;
+
 
 import java.util.Arrays;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
-import org.apache.hadoop.io.DoubleWritable;
-import org.apache.hadoop.io.Text;
-import org.apache.hadoop.mapred.lib.TotalOrderPartitioner;
+import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
+import org.apache.hadoop.mapreduce.lib.output.SequenceFileAsBinaryOutputFormat;
 
-import stock.ecs739.StockInputFormat;
 
 
-public class MinMaxCompany {
+
+
+public class GPlusBFSXtractor {
+
 	public static void runJob(String[] input, String output) throws Exception {
+		
 		Configuration conf = new Configuration();
 		Job job = new Job(conf);
-		job.setJarByClass(MinMaxCompany.class);
+		job.setJarByClass(GPlusBFSXtractor.class);
 
-		job.setReducerClass(CompanyMinMaxReducer.class);
-		job.setMapperClass(DailyMaxMapper.class);
+		job.setMapperClass(GPlusXMapper.class);
 		
-		job.setInputFormatClass(StockInputFormat.class);
+		job.setNumReduceTasks(0);
 		
-		job.setNumReduceTasks(3);
+		job.setOutputFormatClass(SequenceFileAsBinaryOutputFormat.class);
 		
-		job.setOutputKeyClass(Text.class);
-		job.setOutputValueClass(Text.class);
-	
 		
-		job.setMapOutputKeyClass(Text.class);
-		job.setMapOutputValueClass(DoubleWritable.class);
+		job.setOutputKeyClass(LongWritable.class);
+		job.setOutputValueClass(BFSNode.class);
+		
+		
 
 		Path outputPath = new Path(output);
 
@@ -42,10 +43,11 @@ public class MinMaxCompany {
 
 		outputPath.getFileSystem(conf).delete(outputPath, true);
 		job.waitForCompletion(true);
-	}
-
-	public static void main(String[] args) throws Exception {
+    
+  }
+    public static void main(String[] args) throws Exception {
 		runJob(Arrays.copyOfRange(args, 0, args.length - 1),
 				args[args.length - 1]);
 	}
+  
 }
