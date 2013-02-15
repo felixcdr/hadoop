@@ -5,13 +5,14 @@ package bfs;
 import java.io.IOException;
 
 import org.apache.hadoop.io.LongWritable;
+import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Reducer;
 
-public class IterateBFSReducer extends Reducer<LongWritable, BFSNode, LongWritable, BFSNode> {
+public class IterateBFSReducer extends Reducer<Text, BFSNode, Text, BFSNode> {
 	
 	private BFSNode node;
 
-	public void reduce(LongWritable nid, Iterable<BFSNode> values,Context context)
+	public void reduce(Text nid, Iterable<BFSNode> values,Context context)
 			throws IOException, InterruptedException {
 
 		int dist = Integer.MAX_VALUE;
