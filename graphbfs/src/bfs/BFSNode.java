@@ -8,6 +8,7 @@ import org.apache.hadoop.io.ArrayWritable;
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
+import org.apache.hadoop.io.Writable;
 import org.apache.hadoop.io.WritableComparable;
 
 public class BFSNode  implements WritableComparable<BFSNode> {
@@ -65,10 +66,10 @@ public class BFSNode  implements WritableComparable<BFSNode> {
 		}
 
 		public String[] getDest() {
-			Text[] arr = (Text[]) dest.get();
+			Writable[] arr = (Writable[]) dest.get();
 			String[] ldest = new String[arr.length];
 			for (int i = 0; i < arr.length; i++) {
-				ldest[i] = arr[i].toString();
+				ldest[i] = ((Text)arr[i]).toString();
 			}
 			return ldest;
 		}
