@@ -7,11 +7,16 @@ import java.io.IOException;
 import org.apache.hadoop.io.ArrayWritable;
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.LongWritable;
+import org.apache.hadoop.io.Text;
 import org.apache.hadoop.io.WritableComparable;
 
 public class BFSNode  implements WritableComparable<BFSNode> {
 
-		private LongWritable id;
+	
+		public static String DISTANCE_INFO = "DISTANCE_INFORMATION_ONLY";
+	
+	
+		private Text id;
 
 		private ArrayWritable dest;
  
@@ -20,25 +25,25 @@ public class BFSNode  implements WritableComparable<BFSNode> {
 
 		
 		public BFSNode(){
-			set(new LongWritable(),new ArrayWritable(LongWritable.class),new IntWritable());
+			set(new Text(),new ArrayWritable(LongWritable.class),new IntWritable());
 		}
 		
-		public BFSNode(LongWritable id, ArrayWritable dest, IntWritable distance) {
+		public BFSNode(Text id, ArrayWritable dest, IntWritable distance) {
 			set(id, dest, distance);
 		}
 				
-		public void set(LongWritable id, ArrayWritable dest, IntWritable distance) {
+		public void set(Text id, ArrayWritable dest, IntWritable distance) {
 			this.id = id;
 			this.dest = dest;
 			this.distance = distance;
 		}
 		
-		public void set(long id, long[]dest, int distance){
+		public void set(String id, String[]dest, int distance){
 			this.id.set(id);
-			LongWritable[] values = new LongWritable[dest.length];
+			Text[] values = new Text[dest.length];
 			
 			for (int i = 0; i < dest.length; i++) {
-				values[i] = new LongWritable(dest[i]);
+				values[i] = new Text(dest[i]);
 			}
 							
 			this.dest.set(values);
@@ -46,7 +51,7 @@ public class BFSNode  implements WritableComparable<BFSNode> {
 			
 		}
 		
-		public void setId(long id){
+		public void setId(String id){
 			this.id.set(id);
 		}
 		
@@ -55,15 +60,15 @@ public class BFSNode  implements WritableComparable<BFSNode> {
 		}
 
 		
-		public long getId() {
-			return id.get();
+		public String getId() {
+			return id.toString();
 		}
 
-		public long[] getDest() {
-			LongWritable[] arr = (LongWritable[]) dest.get();
-			long[] ldest = new long[arr.length];
+		public String[] getDest() {
+			Text[] arr = (Text[]) dest.get();
+			String[] ldest = new String[arr.length];
 			for (int i = 0; i < arr.length; i++) {
-				ldest[i] = arr[i].get();
+				ldest[i] = arr[i].toString();
 			}
 			return ldest;
 		}
@@ -92,7 +97,7 @@ public class BFSNode  implements WritableComparable<BFSNode> {
 
 		@Override
 		public int compareTo(BFSNode node) {
-			Long self = this.getId();
+			String self = this.getId();
 			
 			return self.compareTo(node.getId());
 		}
@@ -101,7 +106,7 @@ public class BFSNode  implements WritableComparable<BFSNode> {
 		public boolean equals(Object obj) {
 			if (obj instanceof BFSNode) {
 				BFSNode node = (BFSNode) obj;
-				return this.id.get() == node.getId();
+				return this.getId().equals(node.getId());
 			}
 			return false;
 		}

@@ -3,22 +3,23 @@ package bfs;
 import java.io.IOException;
 
 import org.apache.hadoop.io.LongWritable;
+import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
 
 
-public class IterateBFSMapper extends Mapper<LongWritable, BFSNode, LongWritable, BFSNode> {
+public class IterateBFSMapper extends Mapper<Text, BFSNode, Text, BFSNode> {
 
 	// For emitting estimated distances to the outgoing nodes
 	private final BFSNode distanceNode = new BFSNode();
-	private LongWritable key = new LongWritable();
+	private Text key = new Text();
 
 	
 	protected void setup(Context context) throws IOException ,InterruptedException {
 		//to differentiate the two types of emitted values, distanceNodes have MIN_VALUE as id
-		distanceNode.setId(Long.MIN_VALUE);
+		distanceNode.setId(BFSNode.DISTANCE_INFO);
 	};
 	
-	public void map(LongWritable nid, BFSNode node,	Context context) throws IOException, InterruptedException {
+	public void map(Text nid, BFSNode node,	Context context) throws IOException, InterruptedException {
 
 		// Pass along graph structure to reducer, as well as .
 		context.write(nid, node);
@@ -32,11 +33,11 @@ public class IterateBFSMapper extends Mapper<LongWritable, BFSNode, LongWritable
 					.increment(1);
 
 			// adj is the list of outgoing nodes
-			long[] dest = node.getDest();
+			String[] dest = node.getDest();
 			int dist = node.getDistance() + 1;
 			// Keep track of shortest distance to neighbors.
 			for (int i = 0; i < dest.length; i++) {
-				long neighbor = dest[i];
+				String neighbor = dest[i];
 				distanceNode.setDistance(dist);
 				
 				key.set(neighbor);

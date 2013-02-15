@@ -8,19 +8,19 @@ import org.apache.hadoop.mapreduce.Mapper;
 
 
 
-public class GPlusXMapper extends Mapper<LongWritable, Text, LongWritable, BFSNode> {
+public class GPlusXMapper extends Mapper<LongWritable, Text, Text, BFSNode> {
 
 	private BFSNode node = new BFSNode();
 	
-	private long sourceId;
-	private LongWritable key = new LongWritable();
+	private String sourceId;
+	private Text nodeId = new Text();
 	
 		
 	protected void setup(Context context) throws IOException ,InterruptedException {
 		
 		Configuration conf = context.getConfiguration();
-		String source = conf.get("SOURCENODE");
-		sourceId = Long.parseLong(source);
+		sourceId = conf.get("SOURCENODE");
+		
 		
 	};
 	
@@ -29,21 +29,18 @@ public class GPlusXMapper extends Mapper<LongWritable, Text, LongWritable, BFSNo
 		try{
 		//parse text. Format: id:dest1,dest2,dest3
 		String[] parts = value.toString().split(":");
-		long id = Long.parseLong(parts[0]);
+		String id = parts[0];
 		
-		parts  = parts[1].split(",");
-		long[] dest = new long[parts.length];
-		for (int i = 0; i < parts.length; i++) {
-			dest[i] = Long.parseLong(parts[i]);
-		}
+		String[] dest  = parts[1].split(",");
+		
 					
 		//We set distance to 0 only if it is the source node
-		int distance = id!=sourceId?Integer.MAX_VALUE:0;
+		int distance = !id.equals(sourceId)?Integer.MAX_VALUE:0;
 		
-		key.set(id);
+		nodeId.set(id);
 		node.set(id, dest, distance);
 		
-		context.write(key, node);
+		context.write(nodeId, node);
 		
 		}catch (NumberFormatException e) {			
 		}catch (NullPointerException e) {

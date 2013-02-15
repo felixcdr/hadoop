@@ -21,7 +21,7 @@ public class IterateBFSReducer extends Reducer<LongWritable, BFSNode, LongWritab
 				dist = node.getDistance();
 			}
 			//We need the complete node to propagate graph structure
-			if (node.getId() == Long.MIN_VALUE) {
+			if (!node.getId().equals(BFSNode.DISTANCE_INFO)) {
 				this.node = node;
 			}
 		}
