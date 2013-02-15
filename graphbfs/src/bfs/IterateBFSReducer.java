@@ -29,7 +29,7 @@ public class IterateBFSReducer extends Reducer<Text, BFSNode, Text, BFSNode> {
 
 		node.setDistance(dist); // Update the final distance.
 
-		if (dist != Long.MAX_VALUE) {
+		if (dist < Integer.MAX_VALUE) {
 			context.getCounter(IterateBFS.Counters.ReachableNodesAtReduce)
 					.increment(1);
 		}
