@@ -21,9 +21,11 @@ public class GPlusBFSXtractor {
 	public static void runJob(String[] input, String output) throws Exception {
 		
 		Configuration conf = new Configuration();
-		Job job = new Job(conf);
+		
 		
 		conf.set("SOURCENODE","113190063442434121934");
+		Job job = new Job(conf);
+			
 		
 		job.setJarByClass(GPlusBFSXtractor.class);
 
