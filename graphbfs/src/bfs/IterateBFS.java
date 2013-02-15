@@ -33,7 +33,7 @@ public class IterateBFS {
 
 		
 		//You might want to have programmatic access to the number of reducers
-		int numReducers = 3;
+		int numReducers = 15;
 		job.setNumReduceTasks(numReducers);
 
 
