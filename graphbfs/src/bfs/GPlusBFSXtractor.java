@@ -22,6 +22,9 @@ public class GPlusBFSXtractor {
 		
 		Configuration conf = new Configuration();
 		Job job = new Job(conf);
+		
+		conf.set("SOURCENODE","113190063442434121934");
+		
 		job.setJarByClass(GPlusBFSXtractor.class);
 
 		job.setMapperClass(GPlusXMapper.class);
