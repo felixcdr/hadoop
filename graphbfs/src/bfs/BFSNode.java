@@ -25,7 +25,7 @@ public class BFSNode  implements WritableComparable<BFSNode> {
 
 		
 		public BFSNode(){
-			set(new Text(),new ArrayWritable(LongWritable.class),new IntWritable());
+			set(new Text(),new ArrayWritable(Text.class),new IntWritable());
 		}
 		
 		public BFSNode(Text id, ArrayWritable dest, IntWritable distance) {
