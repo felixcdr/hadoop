@@ -16,10 +16,13 @@ import org.apache.hadoop.mapreduce.lib.output.SequenceFileOutputFormat;
 
 
 
-
-
 public class GPlusBFSXtractor {
 
+	static enum Counters {
+		FaultyEntries
+	};
+	
+	
 	public static void runJob(String[] input, String output) throws Exception {
 		
 		Configuration conf = new Configuration();

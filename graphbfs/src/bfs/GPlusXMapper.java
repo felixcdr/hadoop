@@ -42,9 +42,12 @@ public class GPlusXMapper extends Mapper<LongWritable, Text, Text, BFSNode> {
 		
 		context.write(nodeId, node);
 		
-		}catch (NumberFormatException e) {			
+		}catch (NumberFormatException e) {		
+			context.getCounter(GPlusBFSXtractor.Counters.FaultyEntries).increment(1);
 		}catch (NullPointerException e) {
+			context.getCounter(GPlusBFSXtractor.Counters.FaultyEntries).increment(1);
 		}catch (ArrayIndexOutOfBoundsException e) {
+			context.getCounter(GPlusBFSXtractor.Counters.FaultyEntries).increment(1);
 		}
 	}
 	
