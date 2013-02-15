@@ -7,6 +7,8 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.Text;
+import org.apache.hadoop.io.compress.DefaultCodec;
+import org.apache.hadoop.io.SequenceFile;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
@@ -34,6 +36,12 @@ public class GPlusBFSXtractor {
 		job.setNumReduceTasks(0);
 		
 		job.setOutputFormatClass(SequenceFileOutputFormat.class);
+		SequenceFileOutputFormat.setCompressOutput(job, true);
+		SequenceFileOutputFormat.setOutputCompressionType(job,
+		SequenceFile.CompressionType.BLOCK);
+		SequenceFileOutputFormat.setOutputCompressorClass(job,
+		DefaultCodec.class);
+		
 		
 		
 		job.setOutputKeyClass(Text.class);
