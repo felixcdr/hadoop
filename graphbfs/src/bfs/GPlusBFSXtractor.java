@@ -28,7 +28,7 @@ public class GPlusBFSXtractor {
 		Configuration conf = new Configuration();
 		
 		
-		conf.set("SOURCENODE","4930");
+		conf.set("SOURCENODE","708");
 		Job job = new Job(conf);
 			
 		
