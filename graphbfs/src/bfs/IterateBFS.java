@@ -29,12 +29,12 @@ public class IterateBFS {
 		job.setJarByClass(IterateBFS.class);
 
 		job.setMapperClass(IterateBFSMapper.class);
-		job.setReducerClass(IterateBFSReducer.class);
+		//job.setReducerClass(IterateBFSReducer.class);
 
 		
 		//You might want to have programmatic access to the number of reducers
-		int numReducers = 15;
-		job.setNumReduceTasks(numReducers);
+		//int numReducers = 1;
+		//job.setNumReduceTasks(numReducers);
 
 
 		job.setInputFormatClass(SequenceFileInputFormat.class);
