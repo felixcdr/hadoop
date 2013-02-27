@@ -13,6 +13,7 @@ import org.apache.hadoop.mapreduce.lib.db.DBConfiguration;
 import org.apache.hadoop.mapreduce.lib.db.DBInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.mapreduce.lib.output.SequenceFileOutputFormat;
+import org.apache.hadoop.util.GenericOptionsParser;
 import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.util.ToolRunner;
 
@@ -73,7 +74,8 @@ public class DBToLogTwitter extends Configured implements Tool{
 
 	public static void main(String[] args) throws Exception {
 		Configuration conf = new Configuration();
-		int res = ToolRunner.run(conf, new DBToLogTwitter(), args);
+		String[] otherArgs = new GenericOptionsParser(conf, args).getRemainingArgs();
+		int res = ToolRunner.run(conf, new DBToLogTwitter(), otherArgs);
 		System.exit(res);
 	}
 
