@@ -33,6 +33,22 @@ public class Tweet implements WritableComparable<Tweet> {
 
 	
 	
+	public Tweet() {
+		createdAt = new LongWritable();
+		geoLocationLat = new DoubleWritable();
+		geoLocationLong = new DoubleWritable();
+		placeInfo = new Text();
+		id = new LongWritable();
+		tweet = new Text();
+		source = new Text();
+		lang = new Text();
+		screenName = new Text();
+		replyTo = new Text();
+		rtCount = new IntWritable();
+		hashtags = new Text();
+	}
+	
+	
 	@Override
 	public void readFields(DataInput in) throws IOException {
 		createdAt.set(in.readLong());
