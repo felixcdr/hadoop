@@ -63,7 +63,7 @@ public class DBToLogTwitter extends Configured implements Tool{
 		DBInputFormat.setInput(
 		        job,
 		        TweetRecord.class,
-		        "select * from T07272039BASELINEMerged limit 100,200",
+		        "select * from T07272039BASELINEMerged",
 		        "SELECT COUNT(id) FROM T07272039BASELINEMerged");
 		
 		
