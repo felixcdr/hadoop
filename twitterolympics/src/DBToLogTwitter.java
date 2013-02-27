@@ -21,12 +21,16 @@ public class DBToLogTwitter {
 
 	public static void runJob(String mysqlJar, String output) throws Exception {
 
+		
+		
 		Configuration conf = new Configuration();
 
 		JobHelper.addJarForJob(conf, mysqlJar);
 
 		Job job = new Job(conf);
 
+		conf = job.getConfiguration();
+		
 		DBConfiguration.configureDB(conf, "com.mysql.jdbc.Driver",
 				"jdbc:mysql://quark.student.eecs.qmul.ac.uk/tridec01"
 						+ "?user=olympicro&password=olympicro");
