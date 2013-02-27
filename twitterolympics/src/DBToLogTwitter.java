@@ -25,11 +25,12 @@ public class DBToLogTwitter {
 		
 		Configuration conf = new Configuration();
 
-		JobHelper.addJarForJob(conf, mysqlJar);
-
+		
 		Job job = new Job(conf);
 
 		conf = job.getConfiguration();
+		JobHelper.addJarForJob(conf, mysqlJar);
+
 		
 		DBConfiguration.configureDB(conf, "com.mysql.jdbc.Driver",
 				"jdbc:mysql://quark.student.eecs.qmul.ac.uk/tridec01"
