@@ -1,6 +1,7 @@
 import java.io.IOException;
 
 import org.apache.hadoop.conf.Configuration;
+import org.apache.hadoop.conf.Configured;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.NullWritable;
@@ -12,24 +13,22 @@ import org.apache.hadoop.mapreduce.lib.db.DBConfiguration;
 import org.apache.hadoop.mapreduce.lib.db.DBInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.mapreduce.lib.output.SequenceFileOutputFormat;
+import org.apache.hadoop.util.Tool;
+import org.apache.hadoop.util.ToolRunner;
 
-public class DBToLogTwitter {
+public class DBToLogTwitter extends Configured implements Tool{
 
 	static enum Counters {
 		FaultyEntries
 	};
 
-	public static void runJob(String mysqlJar, String output) throws Exception {
+	public int run(String[] args) throws Exception {
 
-		
-		
-		Configuration conf = new Configuration();
+				
+		Job job = new Job(getConf());
 
-		
-		Job job = new Job(conf);
-
-		conf = job.getConfiguration();
-		JobHelper.addJarForJob(conf, mysqlJar);
+		Configuration conf = job.getConfiguration();
+		//JobHelper.addJarForJob(conf, mysqlJar);
 
 		
 		DBConfiguration.configureDB(conf, "com.mysql.jdbc.Driver",
@@ -54,7 +53,7 @@ public class DBToLogTwitter {
 		SequenceFileOutputFormat.setOutputCompressorClass(job,
 		DefaultCodec.class);
 		
-		Path outputPath = new Path(output);
+		Path outputPath = new Path(args[0]);
 
 		FileOutputFormat.setOutputPath(job, outputPath);
 
@@ -68,11 +67,14 @@ public class DBToLogTwitter {
 		
 		
 		job.waitForCompletion(true);
+		return 1;
 
 	}
 
 	public static void main(String[] args) throws Exception {
-		runJob(args[0], args[1]);
+		Configuration conf = new Configuration();
+		int res = ToolRunner.run(conf, new DBToLogTwitter(), args);
+		System.exit(res);
 	}
 
 	public static class Map extends
@@ -84,5 +86,7 @@ public class DBToLogTwitter {
 		}
 
 	}
+
+	
 
 }
