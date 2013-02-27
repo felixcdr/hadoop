@@ -28,6 +28,7 @@ public class TweetRecord extends Tweet implements Writable, DBWritable {
 		}
 		setGeoLocationLat(resultSet.getDouble("geoLocationLat"));
 		setGeoLocationLong(resultSet.getDouble("geoLocationLong"));
+	
 		setPlaceInfo(resultSet.getString("placeInfo"));
 		setId(resultSet.getLong("id"));
 		setTweet(resultSet.getString("tweet"));

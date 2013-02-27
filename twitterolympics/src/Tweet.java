@@ -160,7 +160,8 @@ public class Tweet implements WritableComparable<Tweet> {
 	}
 
 	public void setReplyTo(String replyTo) {
-		this.replyTo.set(replyTo);
+		if(replyTo!=null)
+			this.replyTo.set(replyTo);
 	}
 
 	public int getRtCount() {
