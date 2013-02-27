@@ -24,7 +24,7 @@
 		<!-- Create the build directory structure used by compile -->
 		<mkdir dir="${build}" />
 		<mkdir dir="${build}/lib" />
-		<copy file="lib/cloud9-1.2.9.jar" todir="${build}/lib" />
+		<copy file="lib/mysql-driver.jar" todir="${build}/lib" />
 	</target>
 
 	<target name="compile" depends="init" description="compile the source ">
