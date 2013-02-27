@@ -34,7 +34,7 @@ public class DBToLogTwitter extends Configured implements Tool{
 		
 		DBConfiguration.configureDB(conf, "com.mysql.jdbc.Driver",
 				"jdbc:mysql://quark.student.eecs.qmul.ac.uk/tridec01"
-						+ "?user=olympicro&password=olympicro");
+						+ "?user=olympicro&password=olympicro&characterSetResults=ISO8859_1");
 
 		job.setJarByClass(DBToLogTwitter.class);
 
