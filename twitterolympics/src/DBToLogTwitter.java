@@ -82,9 +82,23 @@ public class DBToLogTwitter extends Configured implements Tool{
 	public static class Map extends
 			Mapper<LongWritable, TweetRecord, Tweet, NullWritable> {
 
+		private Tweet tweet = new Tweet();
+		
 		public void map(LongWritable key, TweetRecord value, Context context)
 				throws IOException, InterruptedException {
-			context.write((Tweet) value, NullWritable.get());
+			tweet.setCreatedAt(value.getCreatedAt());
+			tweet.setGeoLocationLat(value.getGeoLocationLat());
+			tweet.setGeoLocationLong(value.getGeoLocationLong());
+			tweet.setHashtags(value.getHashtags());
+			tweet.setId(value.getId());
+			tweet.setLang(value.getLang());
+			tweet.setPlaceInfo(value.getPlaceInfo());
+			tweet.setReplyTo(value.getReplyTo());
+			tweet.setRtCount(value.getRtCount());
+			tweet.setScreenName(value.getScreenName());
+			tweet.setSource(value.getSource());
+			tweet.setTweet(value.getTweet());
+			context.write(tweet, NullWritable.get());
 		}
 
 	}
