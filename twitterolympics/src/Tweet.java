@@ -1,3 +1,4 @@
+
 import org.apache.hadoop.io.DoubleWritable;
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.LongWritable;
@@ -27,7 +28,7 @@ public class Tweet implements WritableComparable<Tweet> {
 	private Text source;
 	private Text lang;
 	private Text screenName;
-	private Text replyTo;
+//	private Text replyTo;
 	private IntWritable rtCount;
 	private Text hashtags;
 
@@ -43,7 +44,7 @@ public class Tweet implements WritableComparable<Tweet> {
 		source = new Text();
 		lang = new Text();
 		screenName = new Text();
-		replyTo = new Text();
+//		replyTo = new Text();
 		rtCount = new IntWritable();
 		hashtags = new Text();
 	}
@@ -60,7 +61,7 @@ public class Tweet implements WritableComparable<Tweet> {
 		source.set(WritableUtils.readString(in));
 		lang.set(WritableUtils.readString(in));
 		screenName.set(WritableUtils.readString(in));
-		replyTo.set(WritableUtils.readString(in));
+//		replyTo.set(WritableUtils.readString(in));
 		rtCount.set(in.readInt());
 		hashtags.set(WritableUtils.readString(in));
 
@@ -77,7 +78,7 @@ public class Tweet implements WritableComparable<Tweet> {
 		WritableUtils.writeString(out, source.toString());
 		WritableUtils.writeString(out, lang.toString());
 		WritableUtils.writeString(out, screenName.toString());
-		WritableUtils.writeString(out, replyTo.toString());
+//		WritableUtils.writeString(out, replyTo.toString());
 		WritableUtils.writeString(out, rtCount.toString());
 		WritableUtils.writeString(out, hashtags.toString());
 
@@ -155,14 +156,14 @@ public class Tweet implements WritableComparable<Tweet> {
 		this.screenName.set(screenName);
 	}
 
-	public String getReplyTo() {
-		return replyTo.toString();
-	}
+//	public String getReplyTo() {
+//		return replyTo.toString();
+//	}
 
-	public void setReplyTo(String replyTo) {
-		if(replyTo!=null)
-			this.replyTo.set(replyTo);
-	}
+//	public void setReplyTo(String replyTo) {
+//		if(replyTo!=null)
+//			this.replyTo.set(replyTo);
+//	}
 
 	public int getRtCount() {
 		return rtCount.get();
@@ -196,10 +197,10 @@ public class Tweet implements WritableComparable<Tweet> {
 		result = prime * result + ((lang == null) ? 0 : lang.hashCode());
 		result = prime * result
 				+ ((placeInfo == null) ? 0 : placeInfo.hashCode());
-		result = prime * result + ((replyTo == null) ? 0 : replyTo.hashCode());
-		result = prime * result + ((rtCount == null) ? 0 : rtCount.hashCode());
-		result = prime * result
-				+ ((screenName == null) ? 0 : screenName.hashCode());
+//		result = prime * result + ((replyTo == null) ? 0 : replyTo.hashCode());
+//		result = prime * result + ((rtCount == null) ? 0 : rtCount.hashCode());
+//		result = prime * result
+//				+ ((screenName == null) ? 0 : screenName.hashCode());
 		result = prime * result + ((source == null) ? 0 : source.hashCode());
 		result = prime * result + ((tweet == null) ? 0 : tweet.hashCode());
 		return result;

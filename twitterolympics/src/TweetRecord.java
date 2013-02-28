@@ -35,7 +35,7 @@ public class TweetRecord extends Tweet implements Writable, DBWritable {
 		setSource(resultSet.getString("source"));
 		setLang(resultSet.getString("lang"));
 		setScreenName(resultSet.getString("screenName"));
-		setReplyTo(resultSet.getString("replyTo"));
+//		setReplyTo(resultSet.getString("replyTo"));
 		setRtCount(resultSet.getInt("rtCount"));
 		setHashtags(resultSet.getString("hashtags"));
 	}

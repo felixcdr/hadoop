@@ -93,7 +93,7 @@ public class DBToLogTwitter extends Configured implements Tool{
 			tweet.setId(value.getId());
 			tweet.setLang(value.getLang());
 			tweet.setPlaceInfo(value.getPlaceInfo());
-			tweet.setReplyTo(value.getReplyTo());
+//			tweet.setReplyTo(value.getReplyTo());
 			tweet.setRtCount(value.getRtCount());
 			tweet.setScreenName(value.getScreenName());
 			tweet.setSource(value.getSource());
