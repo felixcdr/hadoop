@@ -24,7 +24,9 @@ public class HashCount extends Configured implements Tool{
 		Job job = new Job(getConf());
 
 		Configuration conf = job.getConfiguration();
-				
+		
+		conf.set("mapreduce.child.java.opts", "-Xmx2048m");
+		
 		job.setJarByClass(HashCount.class);
 
 		job.setMapperClass(HashTagsSplitMapper.class);
