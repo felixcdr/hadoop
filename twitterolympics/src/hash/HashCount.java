@@ -29,7 +29,8 @@ public class HashCount extends Configured implements Tool{
 		
 		job.setJarByClass(HashCount.class);
 
-		job.setMapperClass(HashTagsSplitMapper.class);
+		///job.setMapperClass(HashTagsSplitMapper.class);
+		job.setMapperClass(TwitterDullMapper.class);
 		job.setReducerClass(IntSumReducer.class);
 		job.setCombinerClass(IntSumReducer.class);
 
