@@ -17,6 +17,6 @@ public void map(Tweet tweet, NullWritable nothing, Context context)
 
 
 
-
+}
 
 }
